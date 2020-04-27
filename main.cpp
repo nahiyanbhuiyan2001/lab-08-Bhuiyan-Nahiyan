@@ -7,6 +7,20 @@
 #include <array>
 
 #include "imagehelpers.h"
+//TASK ENHANCE
+//replaces right side of image with the left side so there are two halves of the left side.
+void cutInHalf(int o[MAX_H][MAX_W], int height, int width){
+  for(int i = 0; i < height; i++)
+  {
+    for(int pix = width/2; pix < width; pix++)
+    {
+      o[i][pix] = o[i][pix-width/2+1];
+      // changes the pixels
+    }
+  }
+}
+
+
 
 //TASK A
 //  inverts the original colors. As a result, white shades become blacks
@@ -130,6 +144,16 @@ int main() {
       out[row][column] = img[row][column];
     }
   }
+  cutInHalf(out, height, width);
+  writeImage("Task_ENHANCE.pgm",out, height, width);
+
+  for(int row = 0; row < height; row++)
+  {
+    for(int column = 0; column < width; column++)
+    {
+      out[row][column] = img[row][column];
+    }
+  }
   invert(out, height, width);
   writeImage("Task_A.pgm",out, height, width);
 
@@ -185,6 +209,6 @@ int main() {
   pixelate(out, height, width);
   writeImage("Task_F.pgm",out, height, width);
 
-  std::cout<<"Task_A.pgm, Task_B.pgm, Task_C.pgm, Task_D.pgm, Task_E.pgm, Task_F.pgm are ready"<<std::endl;
+  std::cout<<"Task_ENHANCE.pgm, Task_A.pgm, Task_B.pgm, Task_C.pgm, Task_D.pgm, Task_E.pgm, Task_F.pgm are ready"<<std::endl;
   return 0;
 }
